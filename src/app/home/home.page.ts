@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: 'main.page.html',
-  styleUrls: ['main.page.scss'],
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
-export class MainPage {
+export class homePage {
   menus = [
     { name: '전세안전', src: 'assets/mo/main_sec_01.svg' },
     { name: '리포트박스', src: 'assets/mo/main_sec_02.svg' },
