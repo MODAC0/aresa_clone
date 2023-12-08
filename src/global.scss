@@ -178,3 +178,9 @@ table {
   width: 2.5rem;
   height: 2.5rem;
 }
+.custom-icon {
+  color: gray; /* 원하는 색상으로 변경 */
+
+  /* 활성화 상태일 때 사용할 색상 */
+  --ion-color-primary: blue; /* 원하는 활성화 색상으로 변경 */
+}
