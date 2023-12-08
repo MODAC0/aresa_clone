@@ -1,0 +1,7 @@
+{
+  "name": "clone_aresa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
