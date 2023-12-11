@@ -1,0 +1,58 @@
+<app-header></app-header>
+<ion-content fullscreen="fullscreen" scrollY="false">
+  <div class="mx-[1rem] my-5">
+    <section class="py-5 px-4 bg-white rounded-lg">
+      <p class="h3 mb-[1.25rem]">자주 사용하는 메뉴</p>
+      <ul class="flex justify-between">
+        <li
+          *ngFor="let mainMenu of mainMenus"
+          class="flex flex-col flex-wrap items-center"
+        >
+          <button
+            *ngFor="let menu of mainMenu.child"
+            class="flex flex-col items-center first:mb-5"
+          >
+            <ion-icon class="main-icon" src="{{menu.src}}"></ion-icon>
+            <p class="txt pt-2.5">{{menu.name}}</p>
+          </button>
+        </li>
+      </ul>
+    </section>
+    <section class="pt-5 pb-2 px-4 bg-white rounded-lg mt-2">
+      <div class="flex items-center mb-2">
+        <h3 class="h3 mr-1">결과지 다시보기</h3>
+        <ion-icon class="w-2.5 h-2.5" name="chevron-forward-outline"></ion-icon>
+      </div>
+      <ul>
+        <app-list-item
+          *ngFor="let item of resultDatas"
+          [item]="item"
+          [type]="'resultMain'"
+        ></app-list-item>
+      </ul>
+    </section>
+    <section class="py-5 px-4 bg-white rounded-lg mt-2">
+      <div class="flex items-center mb-2">
+        <h3 class="h3">최근 발견된</h3>
+        <h3 class="mx-1 h3 red">악성 전세</h3>
+        <ion-icon
+          class="w-2.5 h-2.5 errorRed"
+          name="chevron-forward-outline"
+        ></ion-icon>
+      </div>
+      <ul class="flex overflow-x-auto">
+        <li
+          class="flex items-stretch py-3 flex-shrink-0 w-full"
+          *ngFor="let jeonseData of jeonseDatas"
+        >
+          <app-list-item
+            *ngFor="let jeonseData of jeonseDatas"
+            [item]="jeonseData"
+            [type]="'jeonseMain'"
+          ></app-list-item>
+        </li>
+      </ul>
+    </section>
+  </div>
+  <app-bottom-tab></app-bottom-tab>
+</ion-content>
