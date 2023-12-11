@@ -23,15 +23,18 @@
         <h3 class="h3 mr-1">결과지 다시보기</h3>
         <ion-icon class="w-2.5 h-2.5" name="chevron-forward-outline"></ion-icon>
       </div>
-      <ul>
+      <div>
         <app-list-item
           *ngFor="let item of resultDatas"
           [item]="item"
           [type]="'resultMain'"
+          class="flex w-full"
         ></app-list-item>
-      </ul>
+      </div>
     </section>
-    <section class="py-5 px-4 bg-white rounded-lg mt-2">
+    <section
+      class="swiper-container py-5 px-4 bg-white rounded-lg mt-2 overflow-hidden"
+    >
       <div class="flex items-center mb-2">
         <h3 class="h3">최근 발견된</h3>
         <h3 class="mx-1 h3 red">악성 전세</h3>
@@ -40,18 +43,17 @@
           name="chevron-forward-outline"
         ></ion-icon>
       </div>
-      <ul class="flex overflow-x-auto">
-        <li
-          class="flex items-stretch py-3 flex-shrink-0 w-full"
+      <div class="flex swiper-wrapper">
+        <app-list-item
           *ngFor="let jeonseData of jeonseDatas"
-        >
-          <app-list-item
-            *ngFor="let jeonseData of jeonseDatas"
-            [item]="jeonseData"
-            [type]="'jeonseMain'"
-          ></app-list-item>
-        </li>
-      </ul>
+          [item]="jeonseData"
+          [type]="'jeonseMain'"
+          class="swiper-slide flex items-stretch flex-shrink-0 w-full"
+        ></app-list-item>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </section>
   </div>
   <app-bottom-tab></app-bottom-tab>

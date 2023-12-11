@@ -5,6 +5,8 @@ import { HeaderComponent } from "src/app/component/header/header.component";
 import { BottomTabComponent } from "src/app/component/bottom-tab/bottom-tab.component";
 import { jeonseDatas, resultDatas } from "src/assets/practiceData";
 import { ListItemComponent } from "src/app/component/list-item/list-item.component";
+import Swiper from "swiper";
+import { AfterViewInit } from "@angular/core";
 
 @Component({
   selector: "app-home",
@@ -19,7 +21,21 @@ import { ListItemComponent } from "src/app/component/list-item/list-item.compone
     ListItemComponent,
   ],
 })
-export class homePage {
+export class homePage implements AfterViewInit {
+  ngAfterViewInit(): void {
+    const swiper = new Swiper(".swiper-container", {
+      slidesPerView: "auto",
+      spaceBetween: 16,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  }
   @Input() jeonseDatas = jeonseDatas;
   @Input() resultDatas = resultDatas;
   mainMenus = [

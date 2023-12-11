@@ -6,13 +6,13 @@
     </p>
     <p class="pb-1 txt">{{ roadAdressText }}</p>
   </div>
-  <div class="flex items-center" *ngIf="type === 'resultMain'">
+  <div class="flex items-center" *ngIf="type === 'jeonseMain'">
     <div class="flex items-center py-0.5 px-1 rounded-sm bg-gray-100 h-5">
       <img class="w-4 h-4 mr-1" src="assets/mo/main_key.svg" />
       <p class="text-xs">55</p>
     </div>
   </div>
-  <p *ngIf="type === 'jeonseMain'" class="text-xs font-bold pt-1">
+  <p *ngIf="type === 'resultMain'" class="text-xs font-bold pt-1">
     {{ status }}
   </p>
 </li>
