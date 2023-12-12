@@ -1,13 +1,24 @@
 <ion-content fullscreen="fullscreen" scrollY="false">
-  <app-bottom-sheet>
-    <header>
-      <h3>자산 타입을 선택해주세요.</h3>
+  <app-bottom-sheet *ngIf="classIsOpen" [closePopup]="classPopupHandler">
+    <header class="pt-7 pl-7">
+      <h3 class="font-bold text-base">자산 타입을 선택해 주세요.</h3>
     </header>
+    <section class="pt-7 px-7">
+      <ul class="flex flex-col">
+        <li
+          class="flex pb-7 w-full items-start"
+          *ngFor="let classType of classTypes; let i = index"
+          (click)="classToSelect(i)"
+        >
+          <p>{{classType.selectName}}</p>
+        </li>
+      </ul>
+    </section>
     <ul></ul>
   </app-bottom-sheet>
   <app-header></app-header>
-  <div>
-    <app-jeonse-tab [menus]="tabMenus"></app-jeonse-tab>
+  <app-jeonse-tab [menus]="tabMenus"></app-jeonse-tab>
+  <div *ngIf="tabMenus[0].isActive">
     <section class="px-4 py-5">
       <header class="mb-4">
         <p class="text-sm">빠르고 쉽게</p>
@@ -15,12 +26,29 @@
       </header>
       <form
         class="p-4 bg rounded-lg bg-white flex flex-col border-solid border border-primary-black-10"
+        (click)="classPopupHandler()"
       >
         <label class="text-primary-black-50 font-bold">자산 종류</label>
         <div class="flex justify-between items-center mt-3">
-          <p class="text-primary-black-50 text-base">어떤 건물을 분석할까요?</p>
+          <p
+            class="text-primary-black-50 text-base"
+            [ngClass]="{
+            'text-primary-black-100' : currentClass
+          }"
+          >
+            {{currentClass || '어떤 건물을 분석할까요?'}}
+          </p>
           <ion-icon name="caret-down-outline"></ion-icon>
         </div>
+      </form>
+      <form
+        class="mt-2 p-4 bg rounded-lg bg-white flex flex-col border-solid border border-primary-black-10"
+      >
+        <label class="text-primary-black-50 font-bold">주소</label>
+        <input
+          placeholder="주소를 입력하세요"
+          class="flex justify-between items-center mt-3 text-base"
+        />
       </form>
     </section>
   </div>

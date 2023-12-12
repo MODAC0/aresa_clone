@@ -4,7 +4,8 @@
     [class.border-solid]="menu.isActive"
     [class.border-b-2]="menu.isActive"
     [class.border-primary-black-100]="menu.isActive"
-    *ngFor="let menu of menus"
+    *ngFor="let menu of menus; let i = index"
+    (click)="onClick(i)"
   >
     <h4
       class="text-[0.8125rem] font-semibold tab-title-h4"

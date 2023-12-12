@@ -11,4 +11,10 @@ import { TabMenus } from "src/app/types/menu";
 })
 export class JeonseTabComponent {
   @Input() menus: TabMenus;
+  onClick = (index: number) => {
+    this.menus.map((menu, i) => {
+      if (index === i) menu.isActive = true;
+      else menu.isActive = false;
+    });
+  };
 }

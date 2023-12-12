@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
   selector: "app-bottom-sheet",
@@ -6,8 +6,12 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./bottom-sheet.component.scss"],
   standalone: true,
 })
-export class BottomSheetComponent implements OnInit {
-  constructor() {}
+export class BottomSheetComponent {
+  @Input() closePopup: () => void;
 
-  ngOnInit() {}
+  closePopupHander() {
+    if (this.closePopup) {
+      this.closePopup();
+    }
+  }
 }
