@@ -1,14 +1,11 @@
 <nav class="fixed bottom-0 w-full py-1 px-7 bg-white rounded-t-xl shadow-md">
   <ul class="flex flex-row justify-between">
-    <li
-      *ngFor="let navMenu of navMenus; let i = index"
-      (click)="toggleIconState(i)"
-    >
-      <button class="flex flex-col items-center">
+    <li *ngFor="let navMenu of navMenus; let i = index" (click)="handleTab(i)">
+      <button class="flex flex-1 flex-col items-center">
         <img [src]="navMenu.isActive ? navMenu.active : navMenu.inactive" />
         <label
           class="text-xs font-normal"
-          [class.disable]="!navMenu.isActive"
+          [class.text-primary-black-50]="!navMenu.isActive"
           >{{ navMenu.name }}</label
         >
       </button>

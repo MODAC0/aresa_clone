@@ -24,7 +24,6 @@ export class LayoutComponent implements OnInit {
       next: () => {
         this.layout = route.snapshot.data["layout"];
         this.path = router.url;
-        console.log(this.layout, this.path);
       },
     });
   }

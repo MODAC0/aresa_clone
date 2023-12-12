@@ -22,20 +22,7 @@ import { AfterViewInit } from "@angular/core";
   ],
 })
 export class homePage implements AfterViewInit {
-  ngAfterViewInit(): void {
-    const swiper = new Swiper(".swiper-container", {
-      slidesPerView: "auto",
-      spaceBetween: 16,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
-  }
+  swiperIndex = 0;
   @Input() jeonseDatas = jeonseDatas;
   @Input() resultDatas = resultDatas;
   mainMenus = [
@@ -64,4 +51,22 @@ export class homePage implements AfterViewInit {
       ],
     },
   ];
+  ngAfterViewInit(): void {
+    const swiper = new Swiper(".swiper-container", {
+      slidesPerView: "auto",
+      spaceBetween: 16,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      // on: () => {
+      //   this.swiperIndex = swiper.activeIndex;
+      // },
+      on: {
+        slideChange: (res) => {
+          this.swiperIndex = res.realIndex;
+        },
+      },
+    });
+  }
 }

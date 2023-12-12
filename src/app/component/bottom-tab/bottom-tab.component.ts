@@ -1,18 +1,26 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { IonicModule } from "@ionic/angular";
-import { Router } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
+
+type NavMenu = {
+  name: string;
+  active: string;
+  inactive: string;
+  path?: string;
+  isActive: boolean;
+};
 
 @Component({
   selector: "app-bottom-tab",
   templateUrl: "./bottom-tab.component.html",
   styleUrls: ["./bottom-tab.component.scss"],
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, RouterModule],
 })
-export class BottomTabComponent {
-  constructor(private router: Router) {}
-  navMenus = [
+export class BottomTabComponent implements OnInit {
+  path: string;
+  navMenus: NavMenu[] = [
     {
       name: "안전진단",
       active: "assets/mo/nav_safety.svg",
@@ -24,14 +32,12 @@ export class BottomTabComponent {
       name: "이슈",
       active: "assets/mo/nav_issue.svg",
       inactive: "assets/mo/nav_issue_off.svg",
-      path: "/home",
       isActive: false,
     },
     {
       name: "모험자산",
       active: "assets/mo/nav_asset.svg",
       inactive: "assets/mo/nav_asset_off.svg",
-      path: "/home",
       isActive: false,
     },
     {
@@ -39,21 +45,34 @@ export class BottomTabComponent {
       active: "assets/mo/nav_home.svg",
       inactive: "assets/mo/nav_home_off.svg",
       path: "/home",
-      isActive: true,
+      isActive: false,
     },
     {
       name: "전체",
       active: "assets/mo/nav_all.svg",
       inactive: "assets/mo/nav_all_off.svg",
-      path: "/home",
       isActive: false,
     },
   ];
-  toggleIconState(index: number) {
-    this.navMenus.forEach((e, i) =>
-      i === index ? (e.isActive = true) : (e.isActive = false)
-    );
-    const path = this.navMenus[index].path;
-    if (path) this.router.navigateByUrl(path);
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.path = this.router.url;
+    this.activeSortMenu(this.path);
+  }
+
+  handleTab(index: number) {
+    if (this.navMenus[index].path) {
+      const { path } = this.navMenus[index];
+      this.router.navigateByUrl(path);
+    }
+    this.activeSortMenu(this.path);
+  }
+
+  activeSortMenu(path: string) {
+    this.navMenus.forEach((menu) => {
+      menu.isActive = menu.path === path;
+    });
   }
 }

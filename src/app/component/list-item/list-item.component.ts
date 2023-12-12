@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { IReport } from "src/interface/dtos/report.interface";
 import { CommonModule } from "@angular/common";
+import { MaskingTypePipe } from "src/app/pipes/masking-type.pipe";
 @Component({
   selector: "app-list-item",
   templateUrl: "./list-item.component.html",
   styleUrls: ["./list-item.component.scss"],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MaskingTypePipe],
 })
 export class ListItemComponent implements OnInit {
   constructor() {}
@@ -17,6 +18,9 @@ export class ListItemComponent implements OnInit {
   roadAdressText: string;
   districtIcon: string;
   status: string;
+  maskingAdress: string;
+  maskingFloor: string;
+
   // ngOnInit : useEffect 디펜던시 배열에 빈 배열을 전달했을 때의 동작과 같은 원리
   ngOnInit() {
     if (this.item) {
@@ -30,7 +34,7 @@ export class ListItemComponent implements OnInit {
       this.districtIcon = districtIcons.find((e) => e.gu === district).src;
       this.roadAdressText = this.item.cheonseLog.roadAddress
         .split(" ")
-        .filter((e, i) => i !== 1)
+        .filter((e, i) => i !== 0)
         .join(" ");
     }
     this.status = this.item.cheonseLog.status;

@@ -1,0 +1,16 @@
+<div class="flex justify-between border-solid border-b border-primary-gray-10">
+  <button
+    class="flex flex-1 py-[0.8125rem] items-center justify-center"
+    [class.border-solid]="menu.isActive"
+    [class.border-b-2]="menu.isActive"
+    [class.border-primary-black-100]="menu.isActive"
+    *ngFor="let menu of menus"
+  >
+    <h4
+      class="text-[0.8125rem] font-semibold tab-title-h4"
+      [class.text-primary-black-50]="!menu.isActive"
+    >
+      {{ menu.title }}
+    </h4>
+  </button>
+</div>

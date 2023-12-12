@@ -1,7 +1,69 @@
-ion-content {
-  --ion-background-color: #f3f3f3;
+.errorRed {
+  color: #c80000;
+}
+
+.swiper-indicator-disabled {
+  width: 0.375rem;
+  height: 0.375rem;
+  background-color: #eaeaec;
+  border-radius: 1rem;
+}
+
+.swiper-indicator-enabled {
+  width: 1rem;
+  height: 0.375rem;
+  background-color: #9797a0;
+  border-radius: 1rem;
+}
+
+.h3 {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.icon-red {
+  fill: #c80000;
+}
+.txt {
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+.dateText {
+  color: #9797a0;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.arrow-line {
+  position: relative;
+}
+
+.arrow-line::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+  height: 0.3375rem;
+  width: 0.3375rem;
+  border-top: 0.0625rem solid #000;
+  border-right: 0.0625rem solid #000;
+  border-radius: 0.0938rem;
+  transform: rotate(45deg);
 }
 
 .errorRed {
-  color: #c80000;
+  color: "#C80000";
+}
+
+.safeTxt {
+  color: #5dc983;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.dengerTxt {
+  color: #5dc983;
+}
+
+.careTxt {
+  color: #5dc983;
 }

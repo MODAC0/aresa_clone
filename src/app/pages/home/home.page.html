@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content fullscreen="fullscreen" scrollY="false">
   <div class="mx-[1rem] my-5">
-    <section class="py-5 px-4 bg-white rounded-lg">
+    <section class="py-5 px-4 bg rounded-lg bg-white">
       <p class="h3 mb-[1.25rem]">자주 사용하는 메뉴</p>
       <ul class="flex justify-between">
         <li
@@ -12,7 +12,7 @@
             *ngFor="let menu of mainMenu.child"
             class="flex flex-col items-center first:mb-5"
           >
-            <ion-icon class="main-icon" src="{{menu.src}}"></ion-icon>
+            <ion-icon class="w-6 h-6" src="{{menu.src}}"></ion-icon>
             <p class="txt pt-2.5">{{menu.name}}</p>
           </button>
         </li>
@@ -37,7 +37,7 @@
     >
       <div class="flex items-center mb-2">
         <h3 class="h3">최근 발견된</h3>
-        <h3 class="mx-1 h3 red">악성 전세</h3>
+        <h3 class="mx-1 h3 text-result-error-100">악성 전세</h3>
         <ion-icon
           class="w-2.5 h-2.5 errorRed"
           name="chevron-forward-outline"
@@ -45,15 +45,21 @@
       </div>
       <div class="flex swiper-wrapper">
         <app-list-item
-          *ngFor="let jeonseData of jeonseDatas"
+          *ngFor="let jeonseData of jeonseDatas;"
           [item]="jeonseData"
           [type]="'jeonseMain'"
           class="swiper-slide flex items-stretch flex-shrink-0 w-full"
         ></app-list-item>
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+      <nav class="flex justify-center gap-1">
+        <div
+          [ngClass]="{
+          'swiper-indicator-enabled': indicator === swiperIndex,
+          'swiper-indicator-disabled': indicator !== swiperIndex,
+        }"
+          *ngFor="let jeonseData of jeonseDatas; let indicator = index"
+        ></div>
+      </nav>
     </section>
   </div>
   <app-bottom-tab></app-bottom-tab>

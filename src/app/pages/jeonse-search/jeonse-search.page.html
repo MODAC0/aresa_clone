@@ -1,13 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Tab 2 </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content fullscreen="fullscreen" scrollY="false">
+  <app-bottom-sheet>
+    <header>
+      <h3>자산 타입을 선택해주세요.</h3>
+    </header>
+    <ul></ul>
+  </app-bottom-sheet>
+  <app-header></app-header>
+  <div>
+    <app-jeonse-tab [menus]="tabMenus"></app-jeonse-tab>
+    <section class="px-4 py-5">
+      <header class="mb-4">
+        <p class="text-sm">빠르고 쉽게</p>
+        <h2 class="text-2xl font-bold">주소로 검색하기</h2>
+      </header>
+      <form
+        class="p-4 bg rounded-lg bg-white flex flex-col border-solid border border-primary-black-10"
+      >
+        <label class="text-primary-black-50 font-bold">자산 종류</label>
+        <div class="flex justify-between items-center mt-3">
+          <p class="text-primary-black-50 text-base">어떤 건물을 분석할까요?</p>
+          <ion-icon name="caret-down-outline"></ion-icon>
+        </div>
+      </form>
+    </section>
+  </div>
 </ion-content>
+<app-bottom-tab></app-bottom-tab>
