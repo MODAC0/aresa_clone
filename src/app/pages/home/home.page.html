@@ -5,16 +5,17 @@
       <p class="h3 mb-[1.25rem]">자주 사용하는 메뉴</p>
       <ul class="flex justify-between">
         <li
-          *ngFor="let mainMenu of mainMenus"
+          *ngFor="let mainMenu of mainMenus; let i = index"
           class="flex flex-col flex-wrap items-center"
         >
-          <button
-            *ngFor="let menu of mainMenu.child"
+          <div
+            *ngFor="let menu of mainMenu.child; let y = index"
             class="flex flex-col items-center first:mb-5"
+            routerLink="{{menu.path}}"
           >
             <ion-icon class="w-6 h-6" src="{{menu.src}}"></ion-icon>
             <p class="txt pt-2.5">{{menu.name}}</p>
-          </button>
+          </div>
         </li>
       </ul>
     </section>
@@ -54,10 +55,10 @@
       <nav class="flex justify-center gap-1">
         <div
           [ngClass]="{
-          'swiper-indicator-enabled': indicator === swiperIndex,
-          'swiper-indicator-disabled': indicator !== swiperIndex,
+          'swiper-indicator-enabled': i === swiperIndex,
+          'swiper-indicator-disabled': i !== swiperIndex,
         }"
-          *ngFor="let jeonseData of jeonseDatas; let indicator = index"
+          *ngFor="let jeonseData of jeonseDatas;index as i"
         ></div>
       </nav>
     </section>

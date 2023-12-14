@@ -1,7 +1,10 @@
 <section
   class="absolute z-auto bg-black bg-opacity-50 w-full h-full"
-  (click)="closePopupHander()"
+  (click)="handleClick()"
 ></section>
-<section class="absolute bottom-0 left-0 w-full bg-white rounded-t-xl z-50">
+<section
+  [@modalAnimation]="isOpen ? 'enter' : 'leave'"
+  class="absolute bottom-0 left-0 w-full bg-white rounded-t-xl z-50"
+>
   <ng-content></ng-content>
 </section>

@@ -2,14 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { IonicModule } from "@ionic/angular";
 import { Router, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
-
-type NavMenu = {
-  name: string;
-  active: string;
-  inactive: string;
-  path?: string;
-  isActive: boolean;
-};
+import { NavMenu } from "src/app/types/menu";
 
 @Component({
   selector: "app-bottom-tab",

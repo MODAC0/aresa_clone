@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { RouterModule } from "@angular/router";
 import { IonicModule } from "@ionic/angular";
 
 @Component({
@@ -6,6 +7,6 @@ import { IonicModule } from "@ionic/angular";
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule, RouterModule],
 })
 export class HeaderComponent {}

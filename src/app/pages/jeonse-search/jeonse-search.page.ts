@@ -4,8 +4,12 @@ import { CommonModule } from "@angular/common";
 import { HeaderComponent } from "src/app/component/header/header.component";
 import { BottomTabComponent } from "src/app/component/bottom-tab/bottom-tab.component";
 import { JeonseTabComponent } from "src/app/component/jeonse-tab/jeonse-tab.component";
-import { TabMenus } from "src/app/types/menu";
+import { TabMenu, ClassType } from "src/app/types/menu";
 import { BottomSheetComponent } from "src/app/component/bottom-sheet/bottom-sheet.component";
+import { BandBannerComponent } from "src/app/component/band-banner/band-banner.component";
+import { ListItemComponent } from "src/app/component/list-item/list-item.component";
+import { jeonseDatas } from "src/assets/practiceData";
+
 @Component({
   selector: "app-jeonse-search",
   templateUrl: "jeonse-search.page.html",
@@ -18,31 +22,45 @@ import { BottomSheetComponent } from "src/app/component/bottom-sheet/bottom-shee
     BottomTabComponent,
     JeonseTabComponent,
     BottomSheetComponent,
+    BandBannerComponent,
+    ListItemComponent,
   ],
 })
 export class jeonseSearchPage {
-  classIsOpen = false;
+  bottomSheetIsOpen: boolean;
+  bandBannerIsOpen = true;
   currentClass: string;
-  tabMenus: TabMenus = [
+  jeonseDatas = jeonseDatas;
+  tabMenus: TabMenu[] = [
     { title: "전세안전진단", isActive: true },
     { title: "결과지 모아보기", isActive: false },
   ];
 
-  classTypes = [
-    { class: "APARTMENT", selectName: "아파트" },
-    { class: "VILLA", selectName: "빌라" },
-    { class: "OFFICETEL", selectName: "오피스텔" },
+  classTypes: ClassType[] = [
+    { class: "VILLA", selectName: "빌라", isAble: true },
+    { class: "APARTMENT", selectName: "아파트", isAble: false },
+    { class: "OFFICETEL", selectName: "오피스텔", isAble: false },
   ];
 
-  sortFilter = ["전체", "열람", "만료"];
+  scopes: TabMenu[] = [
+    { title: "전체", isActive: true },
+    { title: "열람", isActive: false },
+    { title: "만료", isActive: false },
+  ];
 
-  classPopupHandler = () => {
-    this.classIsOpen = !this.classIsOpen;
-  };
+  handleBottomSheet() {
+    this.bottomSheetIsOpen = !this.bottomSheetIsOpen;
+  }
 
-  classToSelect = (index: number) => {
-    const selectedClassName = this.classTypes[index].selectName;
-    this.currentClass = selectedClassName;
-    this.classPopupHandler();
-  };
+  classToSelect(index: number) {
+    const { isAble, selectName } = this.classTypes[index];
+    if (isAble) {
+      this.currentClass = selectName;
+      this.handleBottomSheet();
+    }
+  }
+
+  scopeHandler(title: string) {
+    this.scopes.forEach((scope) => (scope.isActive = scope.title === title));
+  }
 }

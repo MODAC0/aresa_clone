@@ -1,17 +1,20 @@
-import { Component, Input } from "@angular/core";
-
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { MODAL_ANIMATION } from "src/app/animations/anivation.style";
 @Component({
   selector: "app-bottom-sheet",
   templateUrl: "./bottom-sheet.component.html",
   styleUrls: ["./bottom-sheet.component.scss"],
   standalone: true,
+  imports: [CommonModule],
+  animations: [MODAL_ANIMATION],
 })
 export class BottomSheetComponent {
-  @Input() closePopup: () => void;
+  @Input() isOpen: boolean;
+  @Output() bottomSheetIsOpen: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
 
-  closePopupHander() {
-    if (this.closePopup) {
-      this.closePopup();
-    }
+  handleClick() {
+    this.bottomSheetIsOpen.emit(!this.isOpen);
   }
 }

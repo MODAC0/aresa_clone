@@ -1,37 +1,40 @@
-<li class="flex items-stretch py-3 flex-shrink-0 w-full">
-  <img class="w-10 h-10 mr-3" src="{{ districtIcon }}" />
+<li
+  class="flex items-stretch py-3 flex-shrink-0 w-full"
+  [ngClass]="{
+    'bg-white mb-2 px-3 rounded-lg': type === 'resultList'
+  }"
+>
+  <img class="w-10 h-10 mr-3" [src]="districtIcon" />
+
   <div class="flex flex-1 flex-col justify-between">
-    <p class="dateText pt-1">
-      {{ createAt }}
-    </p>
+    <span class="dateText pt-1 text-primary-black-50">
+      {{ type === "resultList" ? (status | assetStatus) : createAt }}
+    </span>
+
     <div class="flex">
-      <p *ngIf="type === 'resultMain'" class="pb-1 mr-1">
-        {{ roadAdressText }},
+      <p class="pb-1 mr-1">
+        {{ type === "jeonseMain" ? (roadAdress | maskString) : roadAdress }}
       </p>
-      <p *ngIf="type === 'resultMain'" class="pb-1 font-bold">
-        {{ item.cheonseLog.floor }}호
-      </p>
-      <p *ngIf="type === 'jeonseMain'" class="pb-1 mr-1">
-        {{ roadAdressText | maskString }},
-      </p>
-      <p *ngIf="type === 'jeonseMain'" class="pb-1 font-bold">
-        {{ item.cheonseLog.floor | maskString }}호
+      <p class="pb-1 font-bold">
+        {{ type === "jeonseMain" ? (floorAdress | maskString) : floorAdress }}호
       </p>
     </div>
   </div>
+
   <div class="flex items-center" *ngIf="type === 'jeonseMain'">
     <div class="flex items-center py-0.5 px-1 rounded-sm bg-gray10 h-5">
       <img class="w-4 h-4 mr-1" src="assets/mo/main_key.svg" />
       <p class="text-xs">55</p>
     </div>
   </div>
+
   <p
     *ngIf="type === 'resultMain'"
     class="text-xs font-bold pt-1"
     [ngClass]="{
       'text-result-success-100': status === 'SAFETY',
       'text-result-warning-100': status === 'WARNING',
-      'text-result-error-100': status === 'DANGER'
+      'text-result-error-100': status !== 'SAFETY' && status !== 'WARNING'
     }"
   >
     {{ status === "SAFETY" ? "안전" : status === "WARNING" ? "주의" : "위험" }}

@@ -1,56 +1,96 @@
 <ion-content fullscreen="fullscreen" scrollY="false">
-  <app-bottom-sheet *ngIf="classIsOpen" [closePopup]="classPopupHandler">
-    <header class="pt-7 pl-7">
+  <app-bottom-sheet
+    *ngIf="bottomSheetIsOpen"
+    [isOpen]="bottomSheetIsOpen"
+    (bottomSheetIsOpen)="bottomSheetIsOpen = $event"
+  >
+    <header class="pt-[1.875rem] pb-6 pl-[1.875rem]">
       <h3 class="font-bold text-base">자산 타입을 선택해 주세요.</h3>
     </header>
-    <section class="pt-7 px-7">
+    <section class="pb-[1.875rem] px-[1.875rem]">
       <ul class="flex flex-col">
         <li
-          class="flex pb-7 w-full items-start"
+          class="flex items-center pb-6 w-full last:pb-0"
           *ngFor="let classType of classTypes; let i = index"
           (click)="classToSelect(i)"
         >
-          <p>{{classType.selectName}}</p>
+          <p
+            class="text-sm"
+            [ngClass]="{'text-primary-black-50' : !classType.isAble}"
+          >
+            {{classType.selectName}}
+          </p>
+          <img
+            *ngIf="!classType.isAble"
+            class="pb-[0.125rem] ml-[0.125rem]"
+            src="./assets/mo/icon-lock.svg"
+          />
         </li>
       </ul>
     </section>
-    <ul></ul>
   </app-bottom-sheet>
+
   <app-header></app-header>
+
   <app-jeonse-tab [menus]="tabMenus"></app-jeonse-tab>
-  <div *ngIf="tabMenus[0].isActive">
-    <section class="px-4 py-5">
-      <header class="mb-4">
-        <p class="text-sm">빠르고 쉽게</p>
-        <h2 class="text-2xl font-bold">주소로 검색하기</h2>
-      </header>
-      <form
-        class="p-4 bg rounded-lg bg-white flex flex-col border-solid border border-primary-black-10"
-        (click)="classPopupHandler()"
-      >
+
+  <section *ngIf="tabMenus[0].isActive" class="px-4 py-5">
+    <header class="mb-4">
+      <p class="text-sm">빠르고 쉽게</p>
+      <h2 class="text-2xl font-bold">주소로 검색하기</h2>
+    </header>
+    <div
+      class="bg rounded-lg bg-white flex flex-col border-solid border border-primary-black-10"
+    >
+      <form (click)="bottomSheetIsOpen = !bottomSheetIsOpen" class="p-4">
         <label class="text-primary-black-50 font-bold">자산 종류</label>
         <div class="flex justify-between items-center mt-3">
           <p
-            class="text-primary-black-50 text-base"
-            [ngClass]="{
-            'text-primary-black-100' : currentClass
-          }"
+            class="text-base"
+            [ngClass]="currentClass ? 'text-primary-black-100': 'text-primary-black-50'"
           >
             {{currentClass || '어떤 건물을 분석할까요?'}}
           </p>
           <ion-icon name="caret-down-outline"></ion-icon>
         </div>
       </form>
+
       <form
-        class="mt-2 p-4 bg rounded-lg bg-white flex flex-col border-solid border border-primary-black-10"
+        *ngIf="currentClass"
+        class="p-4 border-solid border-t border-primary-black-10"
       >
         <label class="text-primary-black-50 font-bold">주소</label>
         <input
-          placeholder="주소를 입력하세요"
+          placeholder="주소를 찾아볼까요?"
           class="flex justify-between items-center mt-3 text-base"
         />
       </form>
-    </section>
-  </div>
+    </div>
+  </section>
+
+  <section *ngIf="tabMenus[1].isActive">
+    <app-band-banner [isOpen]="bandBannerIsOpen"></app-band-banner>
+    <div class="p-5">
+      <ul class="flex">
+        <li
+          *ngFor="let scope of scopes"
+          class="py-[.5625rem] px-3 rounded-xl mr-2"
+          [ngClass]="scope.isActive ? 'bg-primary-black-100' : 'bg-primary-black-10'"
+          (click)="scopeHandler(scope.title)"
+        >
+          <p [ngClass]="scope.isActive ? 'text-white' : 'bg-primary-black-10'">
+            {{scope.title}}
+          </p>
+        </li>
+      </ul>
+      <div class="mt-5">
+        <app-list-item
+          *ngFor="let jeonseData of jeonseDatas;"
+          [item]="jeonseData"
+          [type]="'resultList'"
+        ></app-list-item>
+      </div>
+    </div>
+  </section>
 </ion-content>
 <app-bottom-tab></app-bottom-tab>

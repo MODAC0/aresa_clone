@@ -7,6 +7,7 @@ import { jeonseDatas, resultDatas } from "src/assets/practiceData";
 import { ListItemComponent } from "src/app/component/list-item/list-item.component";
 import Swiper from "swiper";
 import { AfterViewInit } from "@angular/core";
+import { Router, RouterModule } from "@angular/router";
 
 @Component({
   selector: "app-home",
@@ -19,16 +20,23 @@ import { AfterViewInit } from "@angular/core";
     HeaderComponent,
     BottomTabComponent,
     ListItemComponent,
+    RouterModule,
   ],
 })
 export class homePage implements AfterViewInit {
+  constructor() {}
+  path: string;
   swiperIndex = 0;
   @Input() jeonseDatas = jeonseDatas;
   @Input() resultDatas = resultDatas;
   mainMenus = [
     {
       child: [
-        { name: "전세안전", src: "assets/mo/main_sec_01.svg" },
+        {
+          name: "전세안전",
+          src: "assets/mo/main_sec_01.svg",
+          path: "/jeonse-search",
+        },
         { name: "연봉계산기", src: "assets/mo/main_sec_05.svg" },
       ],
     },
@@ -69,4 +77,23 @@ export class homePage implements AfterViewInit {
       },
     });
   }
+
+  // ngOnInit(): void {
+  //   this.path = this.router.url;
+  //   this.activeSortMenu(this.path);
+  // }
+
+  // handleTab(i: number,y: number) {
+  //   if (this.mainMenus[i].child[y].path) {
+  //     const { path } = this.mainMenus[i].child[y];
+  //     this.router.navigateByUrl(path);
+  //   }
+  //   this.activeSortMenu(this.path);
+  // }
+
+  // activeSortMenu(path: string) {
+  //   this.mainMenus.forEach((menu) => {
+  //     menu.isActive = menu.path === path;
+  //   });
+  // }
 }

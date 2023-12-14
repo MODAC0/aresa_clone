@@ -16,15 +16,19 @@ module.exports = {
           10: "#FAE6E6",
           100: "#c80000",
         },
-        "primary-black": "#302f41",
         "primary-black": {
-          10: "#F4F5F6",
+          10: "#EAEAEC",
           50: "#9797A0",
           100: "#302f41",
         },
         "primary-gray": {
           10: "#F2F2F2",
         },
+        "primary-purple": {
+          100: "#8430ED",
+        },
+        "other-pink": "#EFE4EC",
+        white: "#ffffff",
       },
     },
   },
